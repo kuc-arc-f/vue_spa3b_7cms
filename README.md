@@ -22,6 +22,7 @@ https://cms-kuc.netlify.app
 ***
 ### Blog :
 
+https://note.com/knaka0209/n/n862d619fa69e
 
 
 ***
