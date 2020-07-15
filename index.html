@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>cms</title>
+    <!-- -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <!-- CSS -->   
+    <link rel="stylesheet" href="/css/main.css?A2">
+    <link rel="stylesheet" href="/css/theme.css?A2">
+    <link href="/css/main-sp.css?A1" rel="stylesheet" media="screen and (max-width: 480px)">
+    <link rel="stylesheet" href="/css/top_scroll.css?A1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/js/marked.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+    div#div_img_main2 {
+        height: 300px;
+        color: #FFF;
+        margin: 0 0 0px;
+        width: 100%;
+        background:#ddd url(/img/ph2.jpg) no-repeat center center;
+        background-size: cover;
+        text-align: center;
+    }
+    </style>
+</head>
+<body class="drawer drawer--left" >
+    <!-- navi -->
+    <div id="div_navigate_index">
+        <div id="div_head" class="cover">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="/"><p>TestCMS</p></a>
+                    </div>
+                    <div class="col-sm-8" style="text-align: right;">
+                    <!-- nav -->	  
+                        <div class='menubar'>
+                            <ul class='menu text-border'>
+                                <li><a href='#post_items_box'>posts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end_div_head -->
+        <!-- mobile-nav -->
+        <div id="nav-mobile" style="width:100%;">
+            <a class="toggle">
+                <span class="glyphicon glyphicon-menu-hamburger" style="font-size: 34px; color: #FFF"></span>
+            </a>
+            <div class="mobile-child">
+                <ul class='ul_mobile-child'>
+                <li class="mobile-menu-item"><a href='#post_items_box'>posts</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <div class="body_main_wrap" style="background-color: #EEE">
+        <div id="div_img_main2"  class="cover" style="" valign="bottom">
+            <div id="div_img_layer">
+                <h1>〇〇 Blog<br />
+                </h1>
+            </div>
+        </div> 
+        <div class="container">
+            <div class="row conte" id="id_row_service" style="margin-top:10px;">
+                <div class="col-sm-12" style="text-align:center;">
+                <h2 class="h4_td_title">トピック</h2>
+                <hr class="hr_ex1"/>
+                </div>
+            </div>
+            <div class="row conte">
+                <div class="col-sm-4">
+                <img class="img_kao" src="/img/pc1.png" style="margin : 10px;">
+                </div>
+                <div class="col-sm-8">
+                <h3>このサイトの紹介 1</h3>
+                <p> <br>
+                </p>
+                </div>
+            </div>
+            <div class="row conte">
+                <div class="col-sm-4">
+                <img class="img_kao" src="/img/pc1.png" style="margin : 10px;">
+                </div>
+                <div class="col-sm-8">
+                <h3>このサイトの紹介 2</h3>
+                <p> <br>
+                </p>
+                </div>
+            </div>       
+            <!-- -->
+            <div id="app" class="body_wrap">
+                <!-- margin: 20px 0px; -->
+                <div id="post_items_box" class="row conte" style="margin-top: 10px; margin-bottom:20px;">
+                    <div class="col-sm-12">
+                        <div id="div_news">
+                            <h2 class="h4_td_title" >新着の投稿</h2>
+                        </div>
+                        <div class="post_items_wrap" v-for="item in cms_items" v-bind:key="item.id"
+                        style="margin-bottom: 20px;">
+                            <div class="div_news_rows" style="width:100%;">
+                                <span class="glyphicon glyphicon-circle-arrow-right" style="font-size: 28px; float :left;"></span>
+                                <h3 class="">&nbsp;
+                                    <a  href="#" v-on:click="open_modal(item.id)">{{ item.title }}</a>
+                                </h3>
+                            </div>
+                            <div style="width:100%;">
+                                <ul class="ul_time_box">
+                                    <li class="li_time_box"><span class="glyphicon glyphicon glyphicon-time" style="font-size: 16px; float :left;"></span></li>
+                                    <li class="li_time_box">
+                                        <p class="p_time_box">
+                                <time datetime=""><a href="" >{{ item.created_at }}</a></time>
+                            </div>                
+                            <hr class="hr_ex1"  />
+                        </div>
+                    </div>
+                </div>  
+                <!-- modal -->
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal">
+                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">date: {{ modal_item.created_at }} </h4>
+                        </div>
+                        <div class="modal-body">
+                            <h1>{{ modal_item.title }} </h1>
+                            ID : {{ modal_item.id }}<br />
+                            <hr class="hr_ex1"  />
+                            <div id="post_item" v-html="modal_item.content"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->            
+                
+            </div> <!-- end_app -->   
+        </div><!-- end_container -->
+    </div><!-- end_body_main_wrap -->    
+
+    <!-- foot --> 
+    <div class="foot_area_wrap">
+        <p class="p_foot_str">About</p>
+    </div>        
+
+<!-- -->
+<!-- -->
+<script src="/js/LibCommon.js?a2"></script>
+<script src="/js/CmsMain.js?a5"></script>
+
+<script>
+CmsMain.load()
+</script>
+
+<!-- -->
+<style>
+
+div#post_item > p { font-size : 1.6rem; }
+
+div#post_item > p > img{
+    max-width : 100%;
+    height : auto;
+}
+div#post_item > hr {
+  height: 1px;
+  background-color: #000;
+  border: none;
+}
+.foot_area_wrap {
+    background-color: #757575 ; 
+    color:#FFF ; 
+    padding : 200px 40px;
+    margin: 0px;
+}
+.p_foot_str{ font-size : 1.6rem; }
+</style>
+<!-- built files will be auto injected -->
+</body>
+</html>
