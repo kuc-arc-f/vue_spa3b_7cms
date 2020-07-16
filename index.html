@@ -118,10 +118,19 @@
                                     <li class="li_time_box"><span class="glyphicon glyphicon glyphicon-time" style="font-size: 16px; float :left;"></span></li>
                                     <li class="li_time_box">
                                         <p class="p_time_box">
-                                <time datetime=""><a href="" >{{ item.created_at }}</a></time>
+                                <time datetime="">{{ item.created_at }}, ID: {{item.id}}
+                                </time>
                             </div>                
                             <hr class="hr_ex1"  />
                         </div>
+                        <!-- paginate -->
+                        <div v-if="pagenate_display==1" class="paginate_wrap" 
+                            style="text-align: center;">
+                            <button v-on:click="get_next_items()" class="btn btn-lg btn-default">
+                                Next Page 
+                            </button>
+                        </div>
+                        <br />
                     </div>
                 </div>  
                 <!-- modal -->
@@ -157,11 +166,8 @@
 <!-- -->
 <!-- -->
 <script src="/js/LibCommon.js?a2"></script>
-<script src="/js/CmsMain.js?a5"></script>
-
-<script>
-CmsMain.load()
-</script>
+<script src="/js/LibPaginate.js?a3"></script>
+<script src="/js/CmsMain.js?a1"></script>
 
 <!-- -->
 <style>
