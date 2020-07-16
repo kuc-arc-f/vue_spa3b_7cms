@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>cms</title>
     <!-- -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
@@ -15,9 +23,7 @@
     <link rel="stylesheet" href="/css/theme.css?A2">
     <link href="/css/main-sp.css?A1" rel="stylesheet" media="screen and (max-width: 480px)">
     <link rel="stylesheet" href="/css/top_scroll.css?A1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/js/marked.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style>
     div#div_img_main2 {
         height: 300px;
@@ -73,7 +79,7 @@
         <div class="container">
             <div class="row conte" id="id_row_service" style="margin-top:10px;">
                 <div class="col-sm-12" style="text-align:center;">
-                <h2 class="h4_td_title">トピック</h2>
+                <h2 class="h4_td_title mt-2">トピック</h2>
                 <hr class="hr_ex1"/>
                 </div>
             </div>
@@ -103,57 +109,67 @@
                 <div id="post_items_box" class="row conte" style="margin-top: 10px; margin-bottom:20px;">
                     <div class="col-sm-12">
                         <div id="div_news">
-                            <h2 class="h4_td_title" >新着の投稿</h2>
+                            <h2 class="h4_td_title mt-2" >新着の投稿</h2>
                         </div>
                         <div class="post_items_wrap" v-for="item in cms_items" v-bind:key="item.id"
                         style="margin-bottom: 20px;">
-                            <div class="div_news_rows" style="width:100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-right" style="font-size: 28px; float :left;"></span>
-                                <h3 class="">&nbsp;
-                                    <a  href="#" v-on:click="open_modal(item.id)">{{ item.title }}</a>
+                            <div class="div_news_rows" style="width:100%;"
+                                v-on:click="open_modal(item.id)">
+                                <span  style="font-size: 28px; float :left;">
+                                    <i class="fas fa-arrow-circle-right"></i>
+                                </span>
+                                <h3 class="">&nbsp;{{ item.title }}
                                 </h3>
                             </div>
                             <div style="width:100%;">
                                 <ul class="ul_time_box">
-                                    <li class="li_time_box"><span class="glyphicon glyphicon glyphicon-time" style="font-size: 16px; float :left;"></span></li>
-                                    <li class="li_time_box">
-                                        <p class="p_time_box">
-                                <time datetime="">{{ item.created_at }}, ID: {{item.id}}
-                                </time>
+                                    <p class="mb-0">&nbsp;&nbsp;
+                                        <span style="font-size: 20px;">
+                                            <i class="far fa-calendar"></i>
+                                        </span>
+                                        &nbsp;
+                                        {{ item.created_at }} , ID: {{item.id}}
+                                    </p>
+                                </ul>
                             </div>                
                             <hr class="hr_ex1"  />
                         </div>
                         <!-- paginate -->
                         <div v-if="pagenate_display==1" class="paginate_wrap" 
                             style="text-align: center;">
-                            <button v-on:click="get_next_items()" class="btn btn-lg btn-default">
-                                Next Page 
+                            <button v-on:click="get_next_items()" class="btn btn-lg btn-outline-primary">
+                                次ページを読む
                             </button>
                         </div>
                         <br />
                     </div>
                 </div>  
-                <!-- modal -->
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal">
-                    <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
+                <!-- modal -->	
+                <div class="modal fade" id="myModal" tabindex="-1"
+                    role="dialog" aria-labelledby="label1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">date: {{ modal_item.created_at }} </h4>
+                            <h5 class="modal-title" id="label1">
+                                {{ modal_item.created_at }}
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <h1>{{ modal_item.title }} </h1>
-                            ID : {{ modal_item.id }}<br />
+                            ID: {{modal_item.id}}
                             <hr class="hr_ex1"  />
                             <div id="post_item" v-html="modal_item.content"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
-                    </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->            
-                
+                        </div><!-- modal-content -->
+                    </div><!-- modal-dialog -->
+                </div><!-- modal -->                
+
             </div> <!-- end_app -->   
         </div><!-- end_container -->
     </div><!-- end_body_main_wrap -->    
